@@ -15,6 +15,7 @@ import LoginPage from './pages/user/LoginPage';
 import {StorageContext} from './contexts/StorageContext';
 import PrivateRoute from './components/PrivateRoute';
 import CategoriesPage from './pages/posts/CategoriesPage';
+import PostDetailPage from './pages/posts/PostDetailPage';
 
 function App() {
 
@@ -30,8 +31,9 @@ function App() {
 
           <NavBarComponent />
           <PrivateRoute path="/landing" component={HomePage} />
-          <PrivateRoute path="/post" component={PostCreationPage} />
+          <PrivateRoute path="/new-post" component={PostCreationPage} />
           <PrivateRoute path="/posts" component={PostsPage} />
+          <PrivateRoute path="/posts/:id" component={PostDetailPage} />
           <PrivateRoute path="/categories" component={CategoriesPage} />
           <Route path="/user/register" component={RegisterPage} />
           <Route path="/user/login" component={LoginPage} />

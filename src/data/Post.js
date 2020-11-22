@@ -18,6 +18,18 @@ class Post {
         .then(res => res.json())
         .then(data => data.results)
     }
+    getSinglePost(input){
+        return fetch(`${this.baseUrl}/api/v1/forum/posts/${input}/`, {
+            headers: User.getPrivateHeaders()
+        })
+        .then(res => res.json())
+    }
+    getSinglePostReplies(input){
+        return fetch(`${this.baseUrl}/api/v1/forum/posts/${input}/replies/`, {
+            headers: User.getPrivateHeaders()
+        })
+        .then(res => res.json())
+    }
  
 
 }

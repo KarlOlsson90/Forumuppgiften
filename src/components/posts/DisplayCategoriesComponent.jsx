@@ -3,9 +3,9 @@ import { StorageContext } from '../../contexts/StorageContext'
 import Post from '../../data/Post'
 import DisplayCategory from './DisplayCategory'
 
-export default function DisplayCategories() {
+export default function DisplayCategories(props) {
 
-    const {categoriesData, setCategoriesData} = useContext(StorageContext)
+    const { categoriesData, setCategoriesData } = useContext(StorageContext)
 
 
     async function getCategoryData() {
@@ -14,8 +14,12 @@ export default function DisplayCategories() {
             const data = await Post.getCategories()
             setCategoriesData(data)
         } else {
-            console.log("categoridata fanns redan så ingen fetch gjordes")
+            console.log("Kategoridata fanns redan så ingen fetch gjordes")
         }
+    }
+
+    function handleOnClick(input) {
+        props.selectCategory(input)
     }
 
     useEffect(() => {
@@ -26,13 +30,15 @@ export default function DisplayCategories() {
 
     return (
         <div>
-            
-            {categoriesData?.map((categoryObj, index) => {
-            return (
-                <DisplayCategory key={index} categoryObj={categoryObj}></DisplayCategory>
-            )
 
-        })}
+            {categoriesData?.map((categoryObj, index) => {
+
+                return (
+                    <DisplayCategory key={index} categoryObj={categoryObj} handleOnClick={handleOnClick}></DisplayCategory>
+                )
+
+            })}
+            
         </div>
     )
 }

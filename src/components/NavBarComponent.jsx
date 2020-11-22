@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { StorageContext } from '../contexts/StorageContext'
+import Post from '../data/Post'
 import User from '../data/User'
 
 export default function NavBarComponent() {
@@ -23,7 +24,7 @@ export default function NavBarComponent() {
         User.findToken()? (console.log("token finns")) : (console.log("token finns inte"))
      }
      function loginTestUser(){
-         User.loginUser({email: "dybadys@mailinator.com", password:"NatusconsequaturN"})
+         User.loginUser({email: "dedufy@mailinator.com", password:"Doloredolorconsequ"})
          console.log("Loggade in")
          setIsAuthenticated(true)
      }
@@ -31,10 +32,11 @@ export default function NavBarComponent() {
         console.log(User.getUserData())
      }
 
+
     return (
         <ul>
             <li><Link to='/landing'>Hem</Link></li>
-            <li><Link to='/post'>Post</Link></li>
+            <li><Link to='/new-post'>New Post</Link></li>
             <li><Link to='/posts'>Posts</Link></li>
             <li><Link to='/categories'>categories</Link></li>
             <li><Link to='/user/register'>Register</Link></li>

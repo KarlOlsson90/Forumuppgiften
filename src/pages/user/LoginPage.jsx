@@ -9,7 +9,6 @@ export default function LoginPage() {
 
     async function handleSubmit(e, input) {
         e.preventDefault()
-        console.log(input)
         User.loginUser(input)
         if (User.findToken) {
             console.log("inloggad")
