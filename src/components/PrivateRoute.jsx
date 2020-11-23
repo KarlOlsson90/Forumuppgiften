@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react'
-import { Redirect, Route } from 'react-router-dom'
+import React, { useContext } from 'react'
+import {  Route } from 'react-router-dom'
 import { StorageContext } from '../contexts/StorageContext'
 import User from '../data/User'
 import jwt_decode from "jwt-decode";
@@ -7,10 +7,6 @@ import jwt_decode from "jwt-decode";
 export default function PrivateRoute({ component: Component, ...rest }) {
 
     const { isAuthenticated, setIsAuthenticated } = useContext(StorageContext)
-
-    // function checkToken() {
-    //     User.findToken() ? (console.log("token finns")) : (console.log("token finns inte"))
-    // }
 
     function compareTokenExp(token) {
 

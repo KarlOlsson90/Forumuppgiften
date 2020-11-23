@@ -29,9 +29,22 @@ class Post {
             headers: User.getPrivateHeaders()
         })
         .then(res => res.json())
+        .then(data => data.results)
     }
- 
-
+    createPost(input){
+        return fetch(`${this.baseUrl}/api/v1/forum/posts/`, {
+            method: "POST",
+            headers: User.getPrivateHeaders(),
+            body: JSON.stringify(input)
+        }).then((res) => res.json()).then(data => console.log(data))
+    }
+    createReply(input){
+        return fetch(`${this.baseUrl}/api/v1/forum/posts/`, {
+            method: "POST",
+            headers: User.getPrivateHeaders(),
+            body: JSON.stringify(input)
+        }).then((res) => res.json()).then(data => console.log(data))
+    }
 }
 
 export default new Post();

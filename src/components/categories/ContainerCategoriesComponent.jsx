@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import { StorageContext } from '../../contexts/StorageContext'
 import Post from '../../data/Post'
-import DisplayCategory from './DisplayCategory'
+import DisplayCategory from './DisplayCategoryComponent'
 
-export default function DisplayCategories(props) {
+export default function ContainerCategoriesComponent(props) {
 
     const { categoriesData, setCategoriesData } = useContext(StorageContext)
 

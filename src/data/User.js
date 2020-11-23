@@ -20,7 +20,6 @@ class User {
             .then(data => data.results)
     }
     createUser(body) {
-        console.log("hej")
         return fetch(`${this.baseUrl}/api/v1/auth/users/`, {
             method: "POST",
             headers: this.getPublicHeaders(),

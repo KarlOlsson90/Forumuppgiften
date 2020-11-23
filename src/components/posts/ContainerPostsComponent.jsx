@@ -3,7 +3,7 @@ import { StorageContext} from '../../contexts/StorageContext'
 import Post from '../../data/Post'
 import DisplayPostComponent from './DisplayPostComponent'
 
-export default function DisplayPostsComponent(props) {
+export default function ContainerPostsComponent(props) {
 
     const { postsData, setPostsData } = useContext(StorageContext)
 
@@ -12,10 +12,6 @@ export default function DisplayPostsComponent(props) {
         const data = await Post.getPostList()
         setPostsData(data)
 
-    }
-
-    function logPosts() {
-        console.log(postsData)
     }
 
     useEffect(() => {
@@ -35,7 +31,6 @@ export default function DisplayPostsComponent(props) {
                 )}
 
             })}
-            <button onClick={logPosts}>Logga posts</button>
         </div>
     )
 }

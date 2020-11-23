@@ -1,12 +1,13 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function DisplayPostComponent(props) {
     return (
         <div>
-            <br/>
+            <br />
             <Link to={`/posts/${props.postObj.id}`}>{props.postObj.title}</Link>
-            <br/>
+            <div>{props.postObj.countResponses}</div>
+            <br />
         </div>
     )
 }

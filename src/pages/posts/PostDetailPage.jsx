@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import ContainerPostReplies from '../../components/replies/ContainerPostReplies'
+import DisplayReplyComponent from '../../components/replies/DisplayReplyComponent'
+import PostReplyComponent from '../../components/replies/ContainerReplyComponent'
 import Post from '../../data/Post'
 
 export default function PostDetailPage(props) {
@@ -7,21 +10,12 @@ export default function PostDetailPage(props) {
 
     const postId = Number(props.match.params.id)
 
-    const fieldsToDisplay = ["title", "content", "createdAt", "responses"]
+    const fieldsToDisplay = ["title", "content", "createdAt"]
 
     async function getPostData() {
         const data = await Post.getSinglePost(postId)
         setPostData(data)
         console.log(postData)
-    }
-
-    async function getReplies(){
-        const data = await Post.getSinglePostReplies(postId)
-        console.log("replies: ", data)
-    }
-
-    function testet() {
-        getReplies()
     }
 
     useEffect(() => {
@@ -30,19 +24,26 @@ export default function PostDetailPage(props) {
 
     }, [])
 
+    function handleSubmit(input) {
+        console.log(input)
+        Post.createPost(input)
+
+    }
+
     return (
         <div>
-            <button onClick={testet}>Hämta kommentarer för inlägg {postId}</button>
+
             {postData && fieldsToDisplay.map((field, index) => {
-                if (field === "responses") {
-                    <div></div>
-                } else {
-                    return <div>{field}: {postData[`${field}`]}</div>
-                }
-            }
 
-
-            )}
+                    return <div key={index}>{field}: {postData[`${field}`]}</div>
+            })}
+            <PostReplyComponent postId={postId}></PostReplyComponent>
+            <ContainerPostReplies postId={postId}></ContainerPostReplies>
+            {/* {postReplies?.map((reply, index) => {
+                return <DisplayReplyComponent key={index} reply={reply}></DisplayReplyComponent>
+               
+            })} */}
+            
         </div>
     )
 }
