@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { } from 'styled-components'
 
 const SubmitButton = styled.button`
   background: lightblue;
@@ -11,4 +11,20 @@ const SuperSubmitButton = styled(SubmitButton)`
 
 `
 
-export {SubmitButton, SuperSubmitButton};
+const Paragraph = styled.p`
+  color: darkgrey;
+
+`
+
+const SuperDiv = styled.div`
+  color: black;
+  
+
+
+`
+
+const SuperDuperDiv = styled(SuperDiv)`
+  font-weight: bold;
+`
+
+export {SubmitButton, SuperSubmitButton, Paragraph, SuperDiv, SuperDuperDiv};

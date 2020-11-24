@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComments} from '@fortawesome/free-solid-svg-icons'
+import { SuperDuperDiv } from '../Theme/ForumTheme'
 
 export default function DisplayPostComponent(props) {
     return (
@@ -11,7 +12,7 @@ export default function DisplayPostComponent(props) {
             <br />
             <div className="card">
                 <div className="card-header">
-                {props.postObj.title}
+                    <SuperDuperDiv>{props.postObj.title}</SuperDuperDiv>
                 <div className="float-right">
                     
                     <Link to={`/posts/${props.postObj.id}`}>{props.postObj.countResponses}&nbsp;

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { StorageContext } from '../../contexts/StorageContext'
 import Post from '../../data/Post'
-import SubmitButton from '../Theme/forumTheme'
+import { SubmitButton } from '../Theme/ForumTheme'
+
 
 export default function FormPostComponent(props) {
 
