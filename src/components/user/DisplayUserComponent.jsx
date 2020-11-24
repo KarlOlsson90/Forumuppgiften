@@ -5,35 +5,54 @@ import User from '../../data/User'
 
 export default function DisplayUserComponent() {
 
+    const userFields = [["id", "Id"], ["email", "Epost"], ["firstName", "Förnamn"], ["lastName", "Efternamn"], ["title", "Titel"], ["phoneNumber", "Telefonnummer"], ["country", "Land"]]
+
     const { userData, setUserData } = useContext(StorageContext)
+    const { countries, setCountries } = useContext(StorageContext)
 
     async function getUserData() {
 
         if (!userData) {
             const data = await User.getUserData()
-            console.log("hämtade data: ", data)
             setUserData(data)
-        } else {
-            console.log("Data fanns så ingen fetch gjordes: ", userData)
+
         }
 
+    }
+    async function getCountries() {
+        if (!countries) {
+            const data = await User.getCountries()
+            setCountries(data)
+        }
+    }
+    function connectIdWithCountry(input) {
+        const arrayWithCountries = Object.entries(countries)
+        console.log(arrayWithCountries)
+        const countryName = arrayWithCountries[input-1][1].title
+        console.log(countryName)
+        return countryName
     }
 
     useEffect(() => {
 
         getUserData()
-
+        getCountries()
     }, [])
 
     return (
         <div>
-            {userData && Object.entries(userData).map((field, index) => {
+            {(userData && countries) && userFields.map((field, index) => {
                 return (
-                    <div key={index}>
-                        <p>{field[0]}: {field[1]}</p>
-                    </div>
-                )
+                    <ul className="list-group" key={index}>
 
+                        {field[0] !== "country" ? (
+                            <><br></br><li className="list-group-item"><h5>{field[1]}</h5> {userData[field[0]] || "Saknas"}</li></>)
+                            : (
+                             <><br></br><li className="list-group-item"><h5>{field[1]}</h5> {connectIdWithCountry(userData[field[0]])}</li></>
+                            )}
+
+                    </ul>
+                )
             })}
         </div>
     )

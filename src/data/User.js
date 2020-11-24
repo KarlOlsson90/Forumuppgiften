@@ -34,7 +34,8 @@ class User {
         }).then((res) => res.json()).then(data => sessionStorage.setItem('JWT_TOKEN', data.token))
     }
     findToken(){
-        return sessionStorage.getItem('JWT_TOKEN')
+       return sessionStorage.getItem('JWT_TOKEN')
+        
     }
     destroyToken(){
         sessionStorage.removeItem('JWT_TOKEN')

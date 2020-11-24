@@ -19,10 +19,9 @@ export default function ContainerPostReplies(props) {
     
     return (
         <div>
-            <p>hej</p>
             {postReplies?.map((reply, index) => {
-                return <DisplayReplyComponent key={index} reply={reply}></DisplayReplyComponent>
-               
+                return <DisplayReplyComponent convertedDate={props.convertedDate} key={index} reply={reply}></DisplayReplyComponent>
+                
             })}
         </div>
     )

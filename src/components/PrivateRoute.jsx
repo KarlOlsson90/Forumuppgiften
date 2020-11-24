@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import {  Route } from 'react-router-dom'
+import {  Redirect, Route } from 'react-router-dom'
 import { StorageContext } from '../contexts/StorageContext'
 import User from '../data/User'
 import jwt_decode from "jwt-decode";
 
 export default function PrivateRoute({ component: Component, ...rest }) {
 
-    const { isAuthenticated, setIsAuthenticated } = useContext(StorageContext)
+    const {setIsAuthenticated } = useContext(StorageContext)
 
     function compareTokenExp(token) {
 
@@ -27,24 +27,23 @@ export default function PrivateRoute({ component: Component, ...rest }) {
     function validateToken() {
 
         var token = User.findToken();
-
-        if (token) {
+        
+        if (token && token.length > 10) {
             setIsAuthenticated(compareTokenExp(token))
+            return true
         } else {
             setIsAuthenticated(false)
+            return false
         }
-
-
+        
     }
 
-    return <Route
-        {...rest}
-        render={props => (
-            validateToken(),
-            isAuthenticated ? (
+    return <Route {...rest} render={props => (
+            
+            validateToken()? (
                 <Component {...props} />
             ) : (
-                    <div>Inte inloggad</div>
+                <Redirect to={{pathname:'/user/login'}}/>
                 )
         )}
     />

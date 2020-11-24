@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { SubmitButton } from '../Theme/ForumTheme'
 
 export default function FormReplyComponent(props) {
-    
+
     const fields = ["title", "content"]
 
     const [form, setForm] = useState(fields)
@@ -11,22 +12,23 @@ export default function FormReplyComponent(props) {
         const value = event.target.value
         setForm({ ...form, [name]: value })
     }
-
+    
     return (
+        <div className="card bg-light ">
+            <div className="card-body">
+                <form onSubmit={(e) => props.handleSubmit(e, form)}>
 
-        <form onSubmit={(e) => props.handleSubmit(e, form)}>
-            
-            {fields.map((field, index) =>{
-                return(
-                    <div key={index}>
-                        <label>{field}</label>
-                        <input name={field} onChange={handleInputChange}></input>
+                    <div className="form-group">
+                        <input placeholder="Rubrik" className="col-md-12" name="title" onChange={handleInputChange}></input>
                     </div>
-                )
-
-            })}
-            <button type="submit">Publicera kommentar</button>
-            
-        </form>
+                    <div className="form-group">
+                        <textarea placeholder="Skriv en kommentar här" className="col-md-12" name="content" onChange={handleInputChange}></textarea>
+                    </div>
+                    <div className="form-group">
+                        <SubmitButton className="btn btn-primary float-right" type="submit">Kommentera</SubmitButton>
+                    </div>
+                </form>
+            </div>
+        </div>
     )
 }

@@ -15,19 +15,19 @@ export default function ContainerPostsComponent(props) {
     }
 
     useEffect(() => {
+
         getPostsData()
 
     }, [])
 
     return (
         <div>
-            {props.activeCategory}
             {postsData?.map((postObj, index) => {
-                if (postObj.category === props.activeCategory){
+                if (postObj.category === props.activeCategory || props.activeCategory === 999){
                 return (
-                    <>
+
                     <DisplayPostComponent key={index} postObj={postObj}></DisplayPostComponent>
-                    </>
+
                 )}
 
             })}

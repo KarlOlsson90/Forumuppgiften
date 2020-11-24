@@ -4,14 +4,15 @@ import Post from '../../data/Post'
 
 export default function PostCreationPage() {
 
-    function handleSubmit(input) {
-        console.log(input)
+    function handleSubmit(e, input) {
+        e.preventDefault()
         Post.createPost(input)
 
     }
 
     return (
         <div>
+            <br/>
             <FormPostComponent handleSubmit={handleSubmit}></FormPostComponent>
             
             

@@ -15,16 +15,19 @@ import {StorageContext} from './contexts/StorageContext';
 import PrivateRoute from './components/PrivateRoute';
 import PostDetailPage from './pages/posts/PostDetailPage';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userData, setUserData] = useState(null)
   const [postsData, setPostsData] = useState(null)
   const [categoriesData, setCategoriesData] = useState(null)
+  const [countries, setCountries] = useState(null)
 
   return (
     <div className="container">
-      <StorageContext.Provider value={{isAuthenticated, setIsAuthenticated, userData, setUserData, postsData, setPostsData, categoriesData, setCategoriesData}}>
+      <StorageContext.Provider value={{isAuthenticated, setIsAuthenticated, userData, setUserData, postsData, setPostsData, categoriesData, setCategoriesData, countries, setCountries}}>
         <Router>
           <NavBarComponent />
           <Switch>

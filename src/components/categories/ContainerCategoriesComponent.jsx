@@ -7,14 +7,12 @@ export default function ContainerCategoriesComponent(props) {
 
     const { categoriesData, setCategoriesData } = useContext(StorageContext)
 
-
     async function getCategoryData() {
 
         if (!categoriesData) {
             const data = await Post.getCategories()
+            data.push({id:999, title: "All Categories"})
             setCategoriesData(data)
-        } else {
-            console.log("Kategoridata fanns redan så ingen fetch gjordes")
         }
     }
 
@@ -29,8 +27,8 @@ export default function ContainerCategoriesComponent(props) {
     }, [])
 
     return (
-        <div>
-
+        <div className="container">
+            <br/>
             {categoriesData?.map((categoryObj, index) => {
 
                 return (

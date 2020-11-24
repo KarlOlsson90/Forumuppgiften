@@ -2,9 +2,8 @@ import React from 'react'
 
 export default function DisplayCategory(props) {
     return (
-        <div>
-            <p>{props.categoryObj.title}</p>
-            <button onClick={() => props.handleOnClick(props.categoryObj.id)}>Välj cat</button>
+        <div className="container d-inline">
+            <button className="btn btn-secondary" onClick={() => props.handleOnClick(props.categoryObj.id)}>{props.categoryObj.title}</button>
         </div>
     )
 }

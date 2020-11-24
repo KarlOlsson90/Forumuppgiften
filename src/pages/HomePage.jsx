@@ -5,7 +5,6 @@ import DisplayUserComponent from '../components/user/DisplayUserComponent';
 export default function HomePage() {
     return (
         <div>
-            Hej Användare!
 
             <DisplayUserComponent></DisplayUserComponent>
 

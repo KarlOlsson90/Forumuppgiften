@@ -1,7 +1,7 @@
 import React from 'react'
 import Post from '../../data/Post'
 import FormReplyComponent from './FormReplyComponent'
-import Button from '../Theme/forumTheme'
+
 
 export default function PostReplyComponent(props) {
 
@@ -13,13 +13,12 @@ export default function PostReplyComponent(props) {
         }
         console.log(body)
         Post.createReply(body)
-
+        props.history.go(0)
     }
 
     return (
         <div>
             <FormReplyComponent handleSubmit={handleSubmit}></FormReplyComponent>
-            <Button>hej</Button>
         </div>
     )
 }

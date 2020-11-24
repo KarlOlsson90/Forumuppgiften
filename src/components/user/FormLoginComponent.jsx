@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { SuperSubmitButton } from '../Theme/ForumTheme'
 
 export default function FormLoginComponent(props) {
 
@@ -13,19 +15,34 @@ export default function FormLoginComponent(props) {
     }
 
     return (
-        <form>
+        <div className="container d-flex">
 
-            {fields.map((field, index) => {
-                return (
-                    <div key={index}>
-                        <label>{field}</label>
-                        <input name={field} onChange={handleInputChange}></input>
-                    </div>
-                )
+            <form onSubmit={(e) => props.handleSubmit(e, form)} className="col-md-6 ">
+                <br /><br /><br />
+                <div className="col-md-10">
+                    {fields.map((field, index) => {
+                        return (
+                            <div className="form-group" key={index}>
+                                <label>{field}</label>
+                                <input type={field} className="form-control" name={field} onChange={handleInputChange}></input>
+                            </div>
+                        )
 
-            })}
-            <button onClick={(e) => props.handleSubmit(e, form)}>Logga in</button>
+                    })}
+                    <SuperSubmitButton type="submit" className="btn btn-primary float-right">Logga in</SuperSubmitButton>
+                </div>
+            </form>
+            <div className="col-md-6 ">
+                <br /><br /><br /><br />
+                <div className="col-md-10">
+                {props.accessDenied && <div className="alert">Det gick inte att logga in med angivna uppgifter</div>}
+                    <p >Har du inget konto? </p>
+                    <p className="d-inline">Klicka </p>
+                    <Link className="d-inline" to='/user/register'>Här</Link>
+                    <p className="d-inline"> för att registrera dig.</p>
+                </div>
+            </div>
 
-        </form>
+        </div>
     )
 }

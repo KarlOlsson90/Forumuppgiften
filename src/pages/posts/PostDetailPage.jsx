@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import ContainerPostReplies from '../../components/replies/ContainerPostReplies'
-import DisplayReplyComponent from '../../components/replies/DisplayReplyComponent'
 import PostReplyComponent from '../../components/replies/ContainerReplyComponent'
 import Post from '../../data/Post'
+import { Link } from 'react-router-dom'
 
 export default function PostDetailPage(props) {
 
     const [postData, setPostData] = useState({})
 
-    const postId = Number(props.match.params.id)
+    function convertedDate(date){
+        if (date) {
+            const convertedDate = date.substr(0,10) 
+            const convertedTime = date.substr(11,5) 
+            const output = convertedDate + " kl. "+convertedTime
+            return output
+        }
+        
+    }
 
-    const fieldsToDisplay = ["title", "content", "createdAt"]
+    const postId = Number(props.match.params.id)
 
     async function getPostData() {
         const data = await Post.getSinglePost(postId)
@@ -24,25 +32,24 @@ export default function PostDetailPage(props) {
 
     }, [])
 
-    function handleSubmit(input) {
-        console.log(input)
-        Post.createPost(input)
-
-    }
-
     return (
         <div>
+            <br/>
+            <Link to={`/posts/`}>Tillbaka till forumet</Link>
+            <br/> <br/>
+            {postData &&<div className="card bg-dark text-white">
+                <div className="card-header">
+                {postData.title}&nbsp;
+                {convertedDate(postData.createdAt)}
+                </div>
+                <div className="card-body bg-light text-dark">
+                    <p>{postData.content}</p>
+                </div>
 
-            {postData && fieldsToDisplay.map((field, index) => {
-
-                    return <div key={index}>{field}: {postData[`${field}`]}</div>
-            })}
-            <PostReplyComponent postId={postId}></PostReplyComponent>
-            <ContainerPostReplies postId={postId}></ContainerPostReplies>
-            {/* {postReplies?.map((reply, index) => {
-                return <DisplayReplyComponent key={index} reply={reply}></DisplayReplyComponent>
-               
-            })} */}
+            </div>}
+            <br/>
+            <PostReplyComponent postId={postId} history={props.history}></PostReplyComponent>
+            <ContainerPostReplies postId={postId} convertedDate={convertedDate}></ContainerPostReplies>
             
         </div>
     )

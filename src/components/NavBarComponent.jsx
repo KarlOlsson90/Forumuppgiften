@@ -3,33 +3,41 @@ import { Link } from 'react-router-dom'
 import { StorageContext } from '../contexts/StorageContext'
 import User from '../data/User'
 
+
 export default function NavBarComponent() {
 
     const { isAuthenticated, setIsAuthenticated } = useContext(StorageContext)
 
-    function testTwo() {
+    function logOut() {
         User.destroyToken()
-        console.log(sessionStorage)
         setIsAuthenticated(false)
-    }
-
-    function loginTestUser() {
-        User.loginUser({ email: "dedufy@mailinator.com", password: "Doloredolorconsequ" })
-        console.log("Loggade in")
-        setIsAuthenticated(true)
     }
 
 
     return (
-        <ul>
-            <li><Link to='/landing'>Hem</Link></li>
-            <li><Link to='/new-post'>New Post</Link></li>
-            <li><Link to='/posts'>Posts</Link></li>
-            <li><Link to='/user/register'>Register</Link></li>
-            <li><Link to='/user/login'>Login</Link></li>
-            <button onClick={testTwo}>Förstör Token (Logga ut)</button>
-            <button onClick={loginTestUser}>Logga in testanvändare</button>
-        </ul>
+        <>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
+                        <div className="col-md-9">
+                        <ul className="navbar-nav">
+                            <li className="nav-item active"><Link className="nav-link" to='/landing'>Hem</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to='/new-post'>Nytt</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to='/posts'>Forum</Link></li>
+                            {!isAuthenticated && <li className="nav-item"><Link className="nav-link" to='/user/register'>Registrera</Link></li>}
+                            {!isAuthenticated && <li className="nav-item"><Link className="nav-link" to='/user/login'>Logga in</Link></li>}
+                        </ul>      
+                        </div>
+                        <div className="col-md-3 float-right">       
+                        {isAuthenticated && 
+                            <form className="form-inline my-2 my-lg-0 float-right">
+                                <button className="btn btn-outline-danger my-2 my-sm-0"  onClick={logOut}>Logga ut</button>
+                            </form>
+                        }
+                        </div>  
+
+
+            </nav>
+
+        </>
     )
 }
